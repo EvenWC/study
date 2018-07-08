@@ -1,6 +1,10 @@
 package com.evan.study.springboot;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Auther: Administrator
@@ -10,7 +14,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class HelloApplication {
 
+    @Bean
+    public Runnable createRunnable(){
+        return ()->{
+            System.out.println("springboot is run");
+        };
+    }
+
     public static void main(String[] args) {
-        org.springframework.boot.SpringApplication.run(HelloApplication.class);
+        ConfigurableApplicationContext context = SpringApplication.run(HelloApplication.class);
+        context.getBean(Runnable.class).run();
     }
 }
